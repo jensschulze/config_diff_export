@@ -1,0 +1,20 @@
+{
+  "name": "drupal/config_diff_export",
+  "type": "drupal-module",
+  "description": "Exports new and changed configuration files",
+  "keywords": ["Drupal"],
+  "license": "GPL-2.0+",
+  "homepage": "https://www.drupal.org/project/config_diff_export",
+  "minimum-stability": "dev",
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/config_diff_export",
+    "source": "http://cgit.drupalcode.org/config_diff_export"
+  },
+  "authors": [
+    {
+      "name": "Jens Schulze",
+      "role": "Developer"
+    }
+  ],
+  "require": { }
+}

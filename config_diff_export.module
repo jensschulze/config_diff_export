@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * @file
+ * Contains config_diff_export.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function config_diff_export_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the config_diff_export module.
+    case 'help.page.config_diff_export':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Exports new and changed configuration files') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function config_diff_export_theme() {
+  return [
+    'config_diff_export' => [
+      'render element' => 'children',
+    ],
+  ];
+}
