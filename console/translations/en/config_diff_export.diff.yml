@@ -1,0 +1,5 @@
+description: 'Creates a list of all new and updated configuration files.'
+options: {}
+arguments: {}
+messages:
+    success: 'Finished.'

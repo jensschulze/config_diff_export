@@ -1,0 +1,7 @@
+services:
+  config_diff_export.config_diff_export_diff:
+    class: Drupal\config_diff_export\Command\DiffCommand
+    arguments: ['@config.storage', '@config.manager']
+    tags:
+      - { name: drupal.command }
+
