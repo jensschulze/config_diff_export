@@ -1,5 +1,5 @@
 {
-  "name": "drupal/config_diff_export",
+  "name": "jensschulze/config_diff_export",
   "type": "drupal-module",
   "description": "Exports new and changed configuration files",
   "keywords": ["Drupal"],
