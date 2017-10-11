@@ -1,7 +1,7 @@
 config_diff_export.export_form:
-  title: 'Export'
+  title: 'Configuration Diff Export'
   route_name: config_diff_export.export_form
-  description: 'Export configuration diff'
+  description: 'Export configuration diff as packed archive'
   parent: system.admin_config_development
   weight: 99
 
