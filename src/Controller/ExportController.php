@@ -55,7 +55,7 @@ class ExportController extends ControllerBase {
    * @throws \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException
    * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
    */
-  public function export_archive() {
+  public function export_download() {
     $archiveFile = $this->exporter->getArchiveFullPath();
     file_unmanaged_delete($archiveFile);
 

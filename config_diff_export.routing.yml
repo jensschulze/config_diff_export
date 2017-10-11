@@ -1,8 +1,19 @@
 
 config_diff_export.export_controller_export_archive:
-  path: '/admin/config/development/config_diff_export/export'
+  path: '/admin/config/development/config_diff_export/export_download'
   defaults:
-    _controller: '\Drupal\config_diff_export\Controller\ExportController::export_archive'
+    _controller: '\Drupal\config_diff_export\Controller\ExportController::export_download'
     _title: 'exportArchive'
   requirements:
     _permission: 'export config diff'
+
+config_diff_export.export_form:
+  path: '/admin/config/development/config_diff_export/export'
+  defaults:
+    _form: '\Drupal\config_diff_export\Form\ExportForm'
+    _title: 'ExportForm'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE
+
