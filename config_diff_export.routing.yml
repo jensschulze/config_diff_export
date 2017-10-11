@@ -11,7 +11,7 @@ config_diff_export.export_form:
   path: '/admin/config/development/config_diff_export/export'
   defaults:
     _form: '\Drupal\config_diff_export\Form\ExportForm'
-    _title: 'ExportForm'
+    _title: 'Configuration Diff Export'
   requirements:
     _permission: 'access administration pages, export config diff'
   options:
