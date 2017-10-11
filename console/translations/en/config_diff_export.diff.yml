@@ -2,4 +2,5 @@ description: 'Creates a list of all new and updated configuration files.'
 options: {}
 arguments: {}
 messages:
-    success: 'Finished.'
+  no_changes: 'No changes found.'
+  success: 'Finished.'

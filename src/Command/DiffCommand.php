@@ -2,13 +2,10 @@
 
 namespace Drupal\config_diff_export\Command;
 
+use Drupal\config_diff_export\Differ;
 use Drupal\Console\Annotations\DrupalCommand;
 use Drupal\Console\Core\Command\ContainerAwareCommand;
 use Drupal\Console\Core\Style\DrupalStyle;
-use Drupal\Core\Config\CachedStorage;
-use Drupal\Core\Config\ConfigManager;
-use Drupal\Core\Config\FileStorage;
-use Drupal\Core\Config\StorageComparer;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -23,27 +20,19 @@ use Symfony\Component\Console\Output\OutputInterface;
 class DiffCommand extends ContainerAwareCommand {
 
   /**
-   * @var \Drupal\Core\Config\CachedStorage
+   * @var \Drupal\config_diff_export\Differ
    */
-  private $configStorage;
-
-  /**
-   * @var \Drupal\Core\Config\ConfigManager
-   */
-  private $configManager;
+  private $differ;
 
   /**
    * DiffCommand constructor.
    *
-   * @param \Drupal\Core\Config\CachedStorage $configStorage
-   * @param \Drupal\Core\Config\ConfigManager $configManager
+   * @param \Drupal\config_diff_export\Differ $differ
    */
   public function __construct(
-    CachedStorage $configStorage,
-    ConfigManager $configManager
+    Differ $differ
   ) {
-    $this->configStorage = $configStorage;
-    $this->configManager = $configManager;
+    $this->differ = $differ;
     parent::__construct();
   }
 
@@ -60,31 +49,15 @@ class DiffCommand extends ContainerAwareCommand {
    * {@inheritdoc}
    */
   protected function execute(InputInterface $input, OutputInterface $output) {
-    global $config_directories;
     $io = new DrupalStyle($input, $output);
 
-    $directory = $config_directories[CONFIG_SYNC_DIRECTORY];
-    $fileStorage = new FileStorage($directory);
-    $storageComparer = new StorageComparer($this->configStorage, $fileStorage, $this->configManager);
-
-    if (!$storageComparer->createChangelist()->hasChanges()) {
-      $output->writeln($this->trans('commands.config.diff.messages.no-changes'));
+    $list = $this->differ->getConfigurationsList();
+    if (NULL === $list) {
+      $io->info($this->trans('commands.config_diff_export.diff.messages.no_changes'));
       return NULL;
     }
 
-    $changeList = [];
-    foreach ($storageComparer->getAllCollectionNames() as $collection) {
-      $changeList[$collection] = $storageComparer->getChangelist(NULL, $collection);
-    }
-
-    foreach ($changeList as $collection => $changes) {
-      unset($changes['delete'], $changes['rename']);
-      foreach ($changes as $operation => $configs) {
-        foreach ($configs as $config) {
-          $io->writeln("{$config}.yml");
-        }
-      }
-    }
+    $io->writeln($list);
 
     $io->info($this->trans('commands.config_diff_export.diff.messages.success'));
   }

@@ -1,0 +1,5 @@
+description: 'Exports the new and changed configuration files as archive.'
+options: {}
+arguments: {}
+messages:
+    success: 'Archive %s is ready.'

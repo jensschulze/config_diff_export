@@ -1,0 +1,8 @@
+services:
+  config_diff_export.differ:
+    class: Drupal\config_diff_export\Differ
+    arguments: ['@config.storage', '@config.manager']
+
+  config_diff_export.exporter:
+    class: Drupal\config_diff_export\Exporter
+    arguments: ['@config.storage', '@config.manager', '@config_diff_export.differ']
