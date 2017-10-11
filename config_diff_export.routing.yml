@@ -1,0 +1,8 @@
+
+config_diff_export.export_controller_export_archive:
+  path: '/admin/config/development/config_diff_export/export'
+  defaults:
+    _controller: '\Drupal\config_diff_export\Controller\ExportController::export_archive'
+    _title: 'exportArchive'
+  requirements:
+    _permission: 'export config diff'

@@ -32,6 +32,11 @@ class Exporter {
   private $differ;
 
   /**
+   * @var string
+   */
+  private $filename = 'config.tar.gz';
+
+  /**
    * Exporter constructor.
    *
    * @param StorageInterface $storage
@@ -44,10 +49,8 @@ class Exporter {
     $this->differ = $differ;
   }
 
-  public function export() {
-    $dateTime = new \DateTime();
-
-    $archiveFilename = sprintf('/tmp/config_diff-%s.tar.gz', $dateTime->format('Ymd_His'));
+  public function export(?string $archivePath = NULL): string {
+    $archiveFilename = $this->getArchiveFullPath($archivePath);
     $archiveTar = new ArchiveTar($archiveFilename, 'gz');
 
     try {
@@ -70,5 +73,13 @@ class Exporter {
     }
 
     return $archiveFilename;
+  }
+
+  public function getArchiveFullPath(?string $archivePath = NULL): string {
+    return ($archivePath ?? file_directory_temp()) . DIRECTORY_SEPARATOR . $this->filename;
+  }
+
+  public function getFilename(): string {
+    return $this->filename;
   }
 }
