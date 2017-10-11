@@ -42,6 +42,7 @@ class DiffCommand extends ContainerAwareCommand {
   protected function configure() {
     $this
       ->setName('config_diff_export:diff')
+      ->setAliases(['cded'])
       ->setDescription($this->trans('commands.config_diff_export.diff.description'));
   }
 

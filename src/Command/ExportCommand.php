@@ -35,6 +35,7 @@ class ExportCommand extends ContainerAwareCommand {
   protected function configure() {
     $this
       ->setName('config_diff_export:export')
+      ->setAliases(['cdee'])
       ->setDescription($this->trans('commands.config_diff_export.export.description'));
   }
 
